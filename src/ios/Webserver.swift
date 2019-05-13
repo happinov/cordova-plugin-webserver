@@ -70,7 +70,7 @@
         completionBlock(response!)
     }
 
-    func onRequest(_ command: CDVInvokedUrlCommand) {
+    @objc func onRequest(_ command: CDVInvokedUrlCommand) {
         self.onRequestCommand = command
         let pluginResult = CDVPluginResult(status: CDVCommandStatus_NO_RESULT)
         pluginResult?.setKeepCallbackAs(true)
@@ -90,11 +90,11 @@
         )
     }
 
-    func sendResponse(_ command: CDVInvokedUrlCommand) {
+    @objc func sendResponse(_ command: CDVInvokedUrlCommand) {
         self.responses[command.argument(at: 0) as! String] = command.argument(at: 1)
     }
 
-    func start(_ command: CDVInvokedUrlCommand) {
+    @objc func start(_ command: CDVInvokedUrlCommand) {
         var port = 8080
         let portArgument = command.argument(at: 0)
 
@@ -106,7 +106,7 @@
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId)
     }
 
-    func stop(_ command: CDVInvokedUrlCommand) {
+    @objc func stop(_ command: CDVInvokedUrlCommand) {
         if self.webServer.isRunning {
             self.webServer.stop()
         }
